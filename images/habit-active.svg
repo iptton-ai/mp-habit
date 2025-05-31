@@ -1,0 +1,34 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 可爱的星星习惯图标 激活状态 -->
+  <g>
+    <!-- 主星星 -->
+    <path d="M32 8 L36 24 L52 24 L40 34 L44 50 L32 40 L20 50 L24 34 L12 24 L28 24 Z" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+    
+    <!-- 内部小星星 -->
+    <path d="M32 16 L34 22 L40 22 L36 26 L37 32 L32 29 L27 32 L28 26 L24 22 L30 22 Z" fill="#E8F5E8"/>
+    
+    <!-- 可爱的小星星装饰 -->
+    <circle cx="18" cy="18" r="2" fill="#81C784"/>
+    <path d="M18 14 L19 16 L21 16 L19.5 17.5 L20 20 L18 18.5 L16 20 L16.5 17.5 L15 16 L17 16 Z" fill="#4CAF50"/>
+    
+    <circle cx="46" cy="18" r="2" fill="#81C784"/>
+    <path d="M46 14 L47 16 L49 16 L47.5 17.5 L48 20 L46 18.5 L44 20 L44.5 17.5 L43 16 L45 16 Z" fill="#4CAF50"/>
+    
+    <circle cx="18" cy="46" r="2" fill="#81C784"/>
+    <path d="M18 42 L19 44 L21 44 L19.5 45.5 L20 48 L18 46.5 L16 48 L16.5 45.5 L15 44 L17 44 Z" fill="#4CAF50"/>
+    
+    <circle cx="46" cy="46" r="2" fill="#81C784"/>
+    <path d="M46 42 L47 44 L49 44 L47.5 45.5 L48 48 L46 46.5 L44 48 L44.5 45.5 L43 44 L45 44 Z" fill="#4CAF50"/>
+    
+    <!-- 闪闪发光效果 -->
+    <g opacity="0.8">
+      <line x1="32" y1="4" x2="32" y2="8" stroke="#2E7D32" stroke-width="2" stroke-linecap="round"/>
+      <line x1="32" y1="56" x2="32" y2="60" stroke="#2E7D32" stroke-width="2" stroke-linecap="round"/>
+      <line x1="4" y1="32" x2="8" y2="32" stroke="#2E7D32" stroke-width="2" stroke-linecap="round"/>
+      <line x1="56" y1="32" x2="60" y2="32" stroke="#2E7D32" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- 爱心装饰 -->
+    <path d="M32 30 C31 29, 29 29, 29 31 C29 32, 32 34, 32 34 C32 34, 35 32, 35 31 C35 29, 33 29, 32 30 Z" fill="#FF69B4" opacity="0.8"/>
+  </g>
+</svg>

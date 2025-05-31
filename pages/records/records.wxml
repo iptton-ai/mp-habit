@@ -1,0 +1,120 @@
+<!--pages/records/records.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <!-- 积分显示 -->
+  <view class="points-display" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 50%, {{currentTheme.primaryLight || '#FFB6C1'}} 100%)">
+    <view class="points-icon">{{currentTheme.emoji || '🌟'}}</view>
+    <view class="points-number">{{totalPoints}}</view>
+    <view class="points-label">✨ 我的小星星 ✨</view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="card">
+    <view class="section-title mb-20">统计信息</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <view class="stat-number text-primary">{{stats.totalHabits}}</view>
+        <view class="stat-label">完成习惯</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number text-warning">{{stats.totalRewards}}</view>
+        <view class="stat-label">兑换奖励</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number text-primary">{{stats.totalPointsEarned}}</view>
+        <view class="stat-label">获得积分</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number text-danger">{{stats.totalPointsSpent}}</view>
+        <view class="stat-label">消耗积分</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选和操作 -->
+  <view class="card">
+    <view class="filter-section">
+      <view class="filter-label">筛选记录：</view>
+      <picker
+        mode="selector"
+        range="{{filterOptions}}"
+        range-key="label"
+        value="{{currentFilterIndex}}"
+        bindchange="onFilterChange"
+      >
+        <view class="filter-picker">
+          {{currentFilterLabel}}
+          <text class="picker-arrow">></text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="action-section">
+      <button class="btn-danger btn-small" bindtap="clearAllRecords">清空记录</button>
+    </view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="card">
+    <view class="section-title mb-20">
+      记录列表 ({{filteredRecords.length}})
+    </view>
+    
+    <view wx:if="{{filteredRecords.length > 0}}">
+      <view class="record-item" wx:for="{{filteredRecords}}" wx:key="id">
+        <view class="record-main">
+          <view class="record-header">
+            <view class="record-name">{{item.itemName}}</view>
+            <view class="record-points {{item.type === 'habit' ? (item.points > 0 ? 'text-primary' : 'text-danger') : 'text-warning'}}">
+              {{item.type === 'habit' ? (item.points > 0 ? '+' : '') : '-'}}{{Math.abs(item.points)}}积分
+            </view>
+          </view>
+          
+          <view class="record-info">
+            <view class="record-type">
+              {{item.type === 'habit' ? '习惯记录' : '奖励兑换'}}
+            </view>
+            <view class="record-time">
+              {{utils.formatTime(item.createTime)}}
+            </view>
+          </view>
+        </view>
+        
+        <view class="record-action">
+          <button class="btn-cancel-small" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="cancelRecord" data-record="{{item}}">
+            取消
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-state">
+      <view class="empty-icon">📋</view>
+      <view class="empty-text">
+        {{filterType === 'all' ? '还没有任何记录' : 
+          filterType === 'habit' ? '还没有习惯记录' : '还没有奖励记录'}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<wxs module="utils">
+  var formatTime = function(timestamp) {
+    var date = getDate(timestamp)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    
+    var formatNumber = function(n) {
+      return n < 10 ? '0' + n : n.toString()
+    }
+    
+    return year + '/' + formatNumber(month) + '/' + formatNumber(day) + ' ' + 
+           formatNumber(hour) + ':' + formatNumber(minute)
+  }
+  
+  module.exports = {
+    formatTime: formatTime
+  }
+</wxs>

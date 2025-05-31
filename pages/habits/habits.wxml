@@ -1,0 +1,57 @@
+<!--pages/habits/habits.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-primary" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="addHabit">添加新习惯</button>
+    <button class="btn-secondary ml-20" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="toggleTemplates">
+      {{showTemplates ? '隐藏模板' : '使用模板'}}
+    </button>
+  </view>
+
+  <!-- 模板列表 -->
+  <view wx:if="{{showTemplates}}" class="card">
+    <view class="section-title mb-20">习惯模板</view>
+    <view class="template-grid">
+      <view class="template-item" wx:for="{{templates}}" wx:key="name" bindtap="useTemplate" data-template="{{item}}">
+        <view class="template-name">{{item.name}}</view>
+        <view class="template-points {{item.type === 'positive' ? 'text-primary' : 'text-danger'}}">
+          {{item.type === 'positive' ? '+' : ''}}{{item.points}}积分
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 习惯列表 -->
+  <view class="card">
+    <view class="section-title mb-20">我的习惯 ({{habits.length}})</view>
+    
+    <view wx:if="{{habits.length > 0}}">
+      <view class="habit-card" wx:for="{{habits}}" wx:key="id">
+        <view class="habit-header">
+          <view class="habit-name">{{item.name}}</view>
+          <view class="habit-points {{item.points > 0 ? 'text-primary' : 'text-danger'}}">
+            {{item.points > 0 ? '+' : ''}}{{item.points}}积分
+          </view>
+        </view>
+        
+        <view class="habit-actions">
+          <button class="btn-action btn-complete" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="completeHabit" data-habit="{{item}}">
+            完成
+          </button>
+          <button class="btn-action btn-edit" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="editHabit" data-habit="{{item}}">
+            编辑
+          </button>
+          <button class="btn-action btn-delete" bindtap="deleteHabit" data-habit="{{item}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-state">
+      <view class="empty-icon">📝</view>
+      <view class="empty-text">还没有添加任何习惯</view>
+      <button class="btn-primary" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="addHabit">添加第一个习惯</button>
+    </view>
+  </view>
+</view>

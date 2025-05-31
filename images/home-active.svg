@@ -1,0 +1,37 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 可爱的小房子 激活状态 -->
+  <g>
+    <!-- 房子主体 -->
+    <rect x="16" y="28" width="32" height="28" rx="4" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+    
+    <!-- 屋顶 -->
+    <path d="M12 32 L32 16 L52 32 L48 32 L32 20 L16 32 Z" fill="#2E7D32"/>
+    
+    <!-- 门 -->
+    <rect x="26" y="40" width="12" height="16" rx="6" fill="#E8F5E8" stroke="#2E7D32" stroke-width="1"/>
+    
+    <!-- 门把手 -->
+    <circle cx="34" cy="48" r="1.5" fill="#2E7D32"/>
+    
+    <!-- 窗户 -->
+    <rect x="20" y="34" width="8" height="8" rx="2" fill="#E8F5E8" stroke="#2E7D32" stroke-width="1"/>
+    <rect x="36" y="34" width="8" height="8" rx="2" fill="#E8F5E8" stroke="#2E7D32" stroke-width="1"/>
+    
+    <!-- 窗户十字 -->
+    <line x1="24" y1="34" x2="24" y2="42" stroke="#2E7D32" stroke-width="1"/>
+    <line x1="20" y1="38" x2="28" y2="38" stroke="#2E7D32" stroke-width="1"/>
+    <line x1="40" y1="34" x2="40" y2="42" stroke="#2E7D32" stroke-width="1"/>
+    <line x1="36" y1="38" x2="44" y2="38" stroke="#2E7D32" stroke-width="1"/>
+    
+    <!-- 烟囱 -->
+    <rect x="38" y="18" width="4" height="8" fill="#2E7D32"/>
+    
+    <!-- 可爱的烟 -->
+    <circle cx="40" cy="14" r="2" fill="#4CAF50" opacity="0.7"/>
+    <circle cx="42" cy="12" r="1.5" fill="#4CAF50" opacity="0.5"/>
+    <circle cx="38" cy="12" r="1.5" fill="#4CAF50" opacity="0.5"/>
+    
+    <!-- 爱心装饰 -->
+    <path d="M32 24 C30 22, 26 22, 26 26 C26 28, 32 32, 32 32 C32 32, 38 28, 38 26 C38 22, 34 22, 32 24 Z" fill="#FF69B4" opacity="0.8"/>
+  </g>
+</svg>

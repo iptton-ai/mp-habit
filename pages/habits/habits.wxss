@@ -1,0 +1,100 @@
+/* pages/habits/habits.wxss */
+
+.action-buttons {
+  display: flex;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 模板网格 */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.template-item {
+  background-color: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  text-align: center;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.template-item:active {
+  border-color: #4CAF50;
+  background-color: #e8f5e8;
+}
+
+.template-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.template-points {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+/* 习惯卡片 */
+.habit-card {
+  background-color: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #4CAF50;
+}
+
+.habit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.habit-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.habit-points {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 16rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  border: none;
+}
+
+.btn-complete {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+}

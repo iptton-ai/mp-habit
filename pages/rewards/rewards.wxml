@@ -1,0 +1,72 @@
+<!--pages/rewards/rewards.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <!-- 积分显示 -->
+  <view class="points-display" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 50%, {{currentTheme.primaryLight || '#FFB6C1'}} 100%)">
+    <view class="points-icon">{{currentTheme.emoji || '🌟'}}</view>
+    <view class="points-number">{{totalPoints}}</view>
+    <view class="points-label">✨ 我的小星星 ✨</view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-primary" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="addReward">添加新奖励</button>
+    <button class="btn-secondary ml-20" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="toggleTemplates">
+      {{showTemplates ? '隐藏模板' : '使用模板'}}
+    </button>
+  </view>
+
+  <!-- 模板列表 -->
+  <view wx:if="{{showTemplates}}" class="card">
+    <view class="section-title mb-20">奖励模板</view>
+    <view class="template-grid">
+      <view class="template-item" wx:for="{{templates}}" wx:key="name" bindtap="useTemplate" data-template="{{item}}">
+        <view class="template-name">{{item.name}}</view>
+        <view class="template-points text-warning">{{item.points}}积分</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 奖励列表 -->
+  <view class="card">
+    <view class="section-title mb-20">我的奖励 ({{rewards.length}})</view>
+    
+    <view wx:if="{{rewards.length > 0}}">
+      <view class="reward-card" wx:for="{{rewards}}" wx:key="id">
+        <view class="reward-header">
+          <view class="reward-name">{{item.name}}</view>
+          <view class="reward-points text-warning">{{item.points}}积分</view>
+        </view>
+        
+        <view class="reward-status">
+          <view class="status-text {{totalPoints >= item.points ? 'can-redeem' : 'cannot-redeem'}}">
+            {{totalPoints >= item.points ? '可以兑换' : '积分不足'}}
+          </view>
+        </view>
+        
+        <view class="reward-actions">
+          <button
+            class="btn-action btn-redeem"
+            style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)"
+            bindtap="redeemReward"
+            data-reward="{{item}}"
+            disabled="{{totalPoints < item.points}}"
+          >
+            兑换
+          </button>
+          <button class="btn-action btn-edit" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="editReward" data-reward="{{item}}">
+            编辑
+          </button>
+          <button class="btn-action btn-delete" bindtap="deleteReward" data-reward="{{item}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-state">
+      <view class="empty-icon">🎁</view>
+      <view class="empty-text">还没有添加任何奖励</view>
+      <button class="btn-primary" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="addReward">添加第一个奖励</button>
+    </view>
+  </view>
+</view>

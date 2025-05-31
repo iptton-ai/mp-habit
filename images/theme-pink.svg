@@ -1,0 +1,25 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 粉色公主主题图标 -->
+  <g>
+    <!-- 皇冠 -->
+    <path d="M8 28 L12 20 L18 24 L24 16 L30 24 L36 20 L40 28 L40 32 L8 32 Z" fill="#FF69B4"/>
+    <path d="M8 32 L40 32 L38 36 L10 36 Z" fill="#FF1493"/>
+    
+    <!-- 皇冠装饰 -->
+    <circle cx="24" cy="20" r="3" fill="#FFD700"/>
+    <circle cx="16" cy="24" r="2" fill="#FFD700"/>
+    <circle cx="32" cy="24" r="2" fill="#FFD700"/>
+    
+    <!-- 宝石 -->
+    <path d="M24 18 L25 20 L27 20 L25.5 21.5 L26 24 L24 22.5 L22 24 L22.5 21.5 L21 20 L23 20 Z" fill="#FF1493"/>
+    
+    <!-- 樱花装饰 -->
+    <g opacity="0.7">
+      <circle cx="12" cy="12" r="2" fill="#FFB6C1"/>
+      <path d="M12 8 L13 10 L15 10 L13.5 11.5 L14 14 L12 12.5 L10 14 L10.5 11.5 L9 10 L11 10 Z" fill="#FF69B4"/>
+      
+      <circle cx="36" cy="12" r="2" fill="#FFB6C1"/>
+      <path d="M36 8 L37 10 L39 10 L37.5 11.5 L38 14 L36 12.5 L34 14 L34.5 11.5 L33 10 L35 10 Z" fill="#FF69B4"/>
+    </g>
+  </g>
+</svg>

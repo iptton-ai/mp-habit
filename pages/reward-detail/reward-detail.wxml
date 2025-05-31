@@ -1,0 +1,69 @@
+<!--pages/reward-detail/reward-detail.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <form>
+    <!-- 奖励名称 -->
+    <view class="card">
+      <view class="form-item">
+        <view class="form-label">奖励名称</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入奖励名称" 
+          value="{{formData.name}}"
+          bindinput="onNameInput"
+          maxlength="30"
+        />
+      </view>
+    </view>
+
+    <!-- 积分设置 -->
+    <view class="card">
+      <view class="form-item">
+        <view class="form-label">所需积分</view>
+        <picker 
+          mode="selector" 
+          range="{{pointsOptions}}"
+          value="{{pointsOptions.indexOf(formData.points)}}"
+          bindchange="onPointsChange"
+        >
+          <view class="form-picker">
+            {{formData.points}}积分
+            <text class="picker-arrow">></text>
+          </view>
+        </picker>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">自定义积分 (1-1000)</view>
+        <input 
+          class="form-input" 
+          type="number" 
+          placeholder="输入自定义积分数量" 
+          value="{{formData.points}}"
+          bindinput="onCustomPointsInput"
+          maxlength="4"
+        />
+      </view>
+      
+      <view class="form-hint">
+        兑换此奖励需要消耗 {{formData.points}} 积分
+      </view>
+    </view>
+
+    <!-- 预览 -->
+    <view class="card">
+      <view class="form-label mb-20">预览效果</view>
+      <view class="reward-preview">
+        <view class="preview-name">{{formData.name || '奖励名称'}}</view>
+        <view class="preview-points text-warning">{{formData.points}}积分</view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="btn-secondary" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="cancel">取消</button>
+      <button class="btn-primary ml-20" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="saveReward">
+        {{mode === 'add' ? '添加' : '保存'}}
+      </button>
+    </view>
+  </form>
+</view>

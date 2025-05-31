@@ -1,0 +1,90 @@
+/* pages/settings/settings.wxss */
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  /* 颜色通过内联样式动态设置 */
+}
+
+/* 设置项 */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item.danger .setting-name {
+  color: #f44336;
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-name {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.setting-arrow {
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 主题预览 */
+.theme-preview-mini {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.mini-color {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 信息项 */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 底部文字 */
+.footer-text {
+  text-align: center;
+  margin-top: 60rpx;
+  padding: 40rpx;
+  color: #999;
+  font-size: 26rpx;
+}

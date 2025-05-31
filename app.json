@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/habits/habits",
+    "pages/rewards/rewards",
+    "pages/records/records",
+    "pages/settings/settings",
+    "pages/habit-detail/habit-detail",
+    "pages/reward-detail/reward-detail",
+    "pages/theme/theme"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF69B4",
+    "navigationBarTitleText": "🌟 习惯小助手 🌟",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFE4E6"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF69B4",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "🏠 首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/habits/habits",
+        "text": "⭐ 习惯",
+        "iconPath": "images/habit.png",
+        "selectedIconPath": "images/habit-active.png"
+      },
+      {
+        "pagePath": "pages/rewards/rewards",
+        "text": "🎁 奖励",
+        "iconPath": "images/reward.png",
+        "selectedIconPath": "images/reward-active.png"
+      },
+      {
+        "pagePath": "pages/records/records",
+        "text": "📖 记录",
+        "iconPath": "images/record.png",
+        "selectedIconPath": "images/record-active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "⚙️ 设置",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

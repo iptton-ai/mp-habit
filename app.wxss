@@ -1,0 +1,237 @@
+/**app.wxss**/
+/* 可爱字体样式 - 使用系统字体 */
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+/* 通用样式 */
+.page {
+  padding: 20rpx;
+  background: linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%); /* 默认背景 */
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  transition: background 0.3s ease;
+}
+
+.card {
+  /* 背景色和边框通过内联样式动态设置 */
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%); /* 默认背景 */
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 25rpx rgba(255, 105, 180, 0.15); /* 默认阴影 */
+  border: 2rpx solid rgba(255, 182, 193, 0.3); /* 默认边框 */
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); /* 默认背景 */
+  color: white;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 15rpx rgba(255, 105, 180, 0.3); /* 默认阴影 */
+  transition: all 0.3s ease;
+}
+
+.btn-primary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(255, 105, 180, 0.4); /* 默认激活阴影 */
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 100%); /* 默认背景 */
+  color: #FF69B4; /* 默认颜色 */
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  border: 2rpx solid #FFB6C1; /* 默认边框 */
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 15rpx rgba(255, 182, 193, 0.2); /* 默认阴影 */
+  transition: all 0.3s ease;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
+  color: white;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 15rpx rgba(255, 107, 107, 0.3);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  /* 颜色通过内联样式动态设置，使用主题色 */
+  color: #4CAF50; /* 保留作为默认值 */
+}
+
+.text-danger {
+  color: #f44336;
+}
+
+.text-warning {
+  color: #ff9800;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.mb-20 {
+  margin-bottom: 20rpx;
+}
+
+.ml-20 {
+  margin-left: 20rpx;
+}
+
+.mr-20 {
+  margin-right: 20rpx;
+}
+
+.p-20 {
+  padding: 20rpx;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-large {
+  font-size: 36rpx;
+}
+
+.font-small {
+  font-size: 24rpx;
+}
+
+/* 积分显示 */
+.points-display {
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 50%, #FFB6C1 100%); /* 默认背景 */
+  color: white;
+  text-align: center;
+  padding: 40rpx;
+  border-radius: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 25rpx rgba(255, 105, 180, 0.3); /* 默认阴影 */
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.points-display::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: rotate(0deg); opacity: 0.3; }
+  50% { transform: rotate(180deg); opacity: 0.6; }
+}
+
+.points-icon {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.points-number {
+  font-size: 72rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.points-label {
+  font-size: 32rpx;
+  opacity: 0.95;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/* 列表项样式 */
+.list-item {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.list-item-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.list-item-subtitle {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  margin-bottom: 40rpx;
+}

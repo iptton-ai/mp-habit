@@ -1,0 +1,88 @@
+<!--pages/index/index.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <!-- 问候语 -->
+  <view class="card greeting-card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
+    <view class="greeting-icon">{{currentTheme.emoji || '🌸'}}</view>
+    <view class="greeting" style="color: {{currentTheme.primary || '#FF69B4'}}; text-shadow: 0 2rpx 4rpx {{currentTheme.primary || '#FF69B4'}}33;">{{greeting}}</view>
+    <view class="greeting-decoration">
+      <text class="sparkle">✨</text>
+      <text class="sparkle">💖</text>
+      <text class="sparkle">✨</text>
+    </view>
+  </view>
+
+  <!-- 积分显示 -->
+  <view class="points-display" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 50%, {{currentTheme.primaryLight || '#FFB6C1'}} 100%)">
+    <view class="points-icon">{{currentTheme.emoji || '🌟'}}</view>
+    <view class="points-number">{{totalPoints}}</view>
+    <view class="points-label">✨ 我的小星星 ✨</view>
+  </view>
+
+  <!-- 今日习惯 -->
+  <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
+    <view class="section-header flex-between">
+      <view class="section-title" style="color: {{currentTheme.primary || '#FF69B4'}}; text-shadow: 0 1rpx 2rpx {{currentTheme.primary || '#FF69B4'}}33;">⭐ 今日习惯</view>
+      <view class="section-more" style="color: {{currentTheme.primary || '#FF69B4'}};" bindtap="goToHabits">查看全部 💕</view>
+    </view>
+    
+    <view wx:if="{{todayHabits.length > 0}}">
+      <view class="habit-item" wx:for="{{todayHabits}}" wx:key="id">
+        <view class="habit-info">
+          <view class="habit-name">{{item.name}}</view>
+          <view class="habit-points" style="color: {{currentTheme.primary || '#4CAF50'}}; font-weight: bold;">+{{item.points}}积分</view>
+        </view>
+        <button class="btn-complete" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%); box-shadow: 0 4rpx 12rpx {{currentTheme.primary || '#FF69B4'}}4D;" bindtap="completeHabit" data-habit="{{item}}">✅ 完成</button>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-hint">
+      <text>还没有添加习惯哦！快去添加吧！✨</text>
+    </view>
+  </view>
+
+  <!-- 可兑换奖励 -->
+  <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
+    <view class="section-header flex-between">
+      <view class="section-title" style="color: {{currentTheme.primary || '#FF69B4'}}; text-shadow: 0 1rpx 2rpx {{currentTheme.primary || '#FF69B4'}}33;">🎁 可兑换奖励</view>
+      <view class="section-more" style="color: {{currentTheme.primary || '#FF69B4'}};" bindtap="goToRewards">查看全部 🌟</view>
+    </view>
+    
+    <view wx:if="{{todayRewards.length > 0}}">
+      <view class="reward-item" wx:for="{{todayRewards}}" wx:key="id">
+        <view class="reward-info">
+          <view class="reward-name">{{item.name}}</view>
+          <view class="reward-points" style="color: {{currentTheme.primaryDark || '#ff9800'}}; font-weight: bold;">需要{{item.points}}积分</view>
+        </view>
+        <button class="btn-redeem" style="background: linear-gradient(135deg, {{currentTheme.primaryLight || '#FFB6C1'}} 0%, {{currentTheme.primary || '#FF69B4'}} 100%); box-shadow: 0 4rpx 12rpx {{currentTheme.primary || '#FF69B4'}}4D;" bindtap="redeemReward" data-reward="{{item}}">兑换</button>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-hint">
+      <text>暂时没有可兑换的奖励</text>
+    </view>
+  </view>
+
+  <!-- 今日记录 -->
+  <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
+    <view class="section-header flex-between">
+      <view class="section-title" style="color: {{currentTheme.primary || '#FF69B4'}}; text-shadow: 0 1rpx 2rpx {{currentTheme.primary || '#FF69B4'}}33;">📝 今日记录</view>
+      <view class="section-more" style="color: {{currentTheme.primary || '#FF69B4'}};" bindtap="goToRecords">查看全部 📋</view>
+    </view>
+    
+    <view wx:if="{{todayRecords.length > 0}}">
+      <view class="record-item" wx:for="{{todayRecords}}" wx:key="id">
+        <view class="record-info">
+          <view class="record-name">{{item.itemName}}</view>
+          <view class="record-points" style="color: {{item.type === 'habit' ? (currentTheme.primary || '#4CAF50') : (currentTheme.primaryDark || '#ff9800')}}; font-weight: bold;">
+            {{item.type === 'habit' ? '+' : '-'}}{{item.points}}积分
+          </view>
+        </view>
+        <button class="btn-cancel" bindtap="cancelRecord" data-record="{{item}}">取消</button>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-hint">
+      <text>今天还没有记录</text>
+    </view>
+  </view>
+</view>

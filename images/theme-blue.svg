@@ -1,0 +1,42 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 蓝色海洋主题图标 海豚 -->
+  <g>
+    <!-- 海豚身体 -->
+    <ellipse cx="24" cy="26" rx="16" ry="8" fill="#BBDEFB"/>
+    <ellipse cx="24" cy="26" rx="14" ry="6" fill="#E3F2FD"/>
+    
+    <!-- 海豚头部 -->
+    <ellipse cx="32" cy="24" rx="6" ry="5" fill="#BBDEFB"/>
+    <ellipse cx="32" cy="24" rx="4" ry="3" fill="#E3F2FD"/>
+    
+    <!-- 海豚嘴巴 -->
+    <ellipse cx="38" cy="24" rx="3" ry="2" fill="#2196F3"/>
+    
+    <!-- 眼睛 -->
+    <circle cx="30" cy="22" r="2" fill="#2196F3"/>
+    <circle cx="30" cy="21" r="1" fill="white"/>
+    
+    <!-- 背鳍 -->
+    <path d="M20 18 Q24 14 28 18 Q24 20 20 18" fill="#2196F3"/>
+    
+    <!-- 尾鳍 -->
+    <path d="M8 26 Q12 20 16 26 Q12 32 8 26" fill="#2196F3"/>
+    
+    <!-- 胸鳍 -->
+    <ellipse cx="26" cy="30" rx="4" ry="2" fill="#2196F3" transform="rotate(30 26 30)"/>
+    
+    <!-- 海浪装饰 -->
+    <g opacity="0.6">
+      <path d="M4 36 Q8 32 12 36 Q16 32 20 36 Q24 32 28 36 Q32 32 36 36 Q40 32 44 36" stroke="#2196F3" stroke-width="2" fill="none"/>
+      <path d="M2 40 Q6 36 10 40 Q14 36 18 40 Q22 36 26 40 Q30 36 34 40 Q38 36 42 40 Q46 36 50 40" stroke="#BBDEFB" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- 气泡装饰 -->
+    <g opacity="0.7">
+      <circle cx="12" cy="12" r="2" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+      <circle cx="18" cy="8" r="1.5" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+      <circle cx="36" cy="10" r="2" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+      <circle cx="42" cy="14" r="1" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

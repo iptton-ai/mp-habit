@@ -1,0 +1,79 @@
+<!--pages/habit-detail/habit-detail.wxml-->
+<view class="page" style="background: {{currentTheme.background || 'linear-gradient(135deg, #FFE4E6 0%, #FFF0F5 50%, #E8F5E8 100%)'}}">
+  <form>
+    <!-- 习惯名称 -->
+    <view class="card">
+      <view class="form-item">
+        <view class="form-label">习惯名称</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入习惯名称" 
+          value="{{formData.name}}"
+          bindinput="onNameInput"
+          maxlength="20"
+        />
+      </view>
+    </view>
+
+    <!-- 习惯类型 -->
+    <view class="card">
+      <view class="form-item">
+        <view class="form-label">习惯类型</view>
+        <picker 
+          mode="selector" 
+          range="{{typeOptions}}" 
+          range-key="label"
+          value="{{formData.type === 'positive' ? 0 : 1}}"
+          bindchange="onTypeChange"
+        >
+          <view class="form-picker">
+            {{formData.type === 'positive' ? '好习惯（获得积分）' : '坏习惯（扣除积分）'}}
+            <text class="picker-arrow">></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 积分设置 -->
+    <view class="card">
+      <view class="form-item">
+        <view class="form-label">积分数量</view>
+        <picker 
+          mode="selector" 
+          range="{{pointsOptions}}"
+          value="{{pointsOptions.indexOf(formData.points)}}"
+          bindchange="onPointsChange"
+        >
+          <view class="form-picker">
+            {{formData.points}}积分
+            <text class="picker-arrow">></text>
+          </view>
+        </picker>
+      </view>
+      
+      <view class="form-hint">
+        <text wx:if="{{formData.type === 'positive'}}">完成此习惯将获得 {{formData.points}} 积分</text>
+        <text wx:else>做了此行为将扣除 {{formData.points}} 积分</text>
+      </view>
+    </view>
+
+    <!-- 预览 -->
+    <view class="card">
+      <view class="form-label mb-20">预览效果</view>
+      <view class="habit-preview">
+        <view class="preview-name">{{formData.name || '习惯名称'}}</view>
+        <view class="preview-points {{formData.type === 'positive' ? 'text-primary' : 'text-danger'}}">
+          {{formData.type === 'positive' ? '+' : '-'}}{{formData.points}}积分
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="btn-secondary" style="background: {{currentTheme.secondary || '#FFF0F5'}}; color: {{currentTheme.primary || '#FF69B4'}}; border-color: {{currentTheme.primaryLight || '#FFB6C1'}}" bindtap="cancel">取消</button>
+      <button class="btn-primary ml-20" style="background: linear-gradient(135deg, {{currentTheme.primary || '#FF69B4'}} 0%, {{currentTheme.primaryDark || '#FF1493'}} 100%)" bindtap="saveHabit">
+        {{mode === 'add' ? '添加' : '保存'}}
+      </button>
+    </view>
+  </form>
+</view>

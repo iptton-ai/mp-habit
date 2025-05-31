@@ -1,0 +1,47 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 可爱的设置齿轮图标 -->
+  <g>
+    <!-- 主齿轮 -->
+    <circle cx="32" cy="32" r="20" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+    
+    <!-- 齿轮齿 -->
+    <g fill="#FF69B4">
+      <!-- 上 -->
+      <rect x="30" y="8" width="4" height="8" rx="2"/>
+      <!-- 右上 -->
+      <rect x="46" y="14" width="8" height="4" rx="2" transform="rotate(45 50 16)"/>
+      <!-- 右 -->
+      <rect x="48" y="30" width="8" height="4" rx="2"/>
+      <!-- 右下 -->
+      <rect x="46" y="46" width="8" height="4" rx="2" transform="rotate(-45 50 48)"/>
+      <!-- 下 -->
+      <rect x="30" y="48" width="4" height="8" rx="2"/>
+      <!-- 左下 -->
+      <rect x="10" y="46" width="8" height="4" rx="2" transform="rotate(45 14 48)"/>
+      <!-- 左 -->
+      <rect x="8" y="30" width="8" height="4" rx="2"/>
+      <!-- 左上 -->
+      <rect x="10" y="14" width="8" height="4" rx="2" transform="rotate(-45 14 16)"/>
+    </g>
+    
+    <!-- 中心圆孔 -->
+    <circle cx="32" cy="32" r="8" fill="#FFF0F5" stroke="#FF69B4" stroke-width="2"/>
+    
+    <!-- 可爱的装饰螺丝 -->
+    <circle cx="26" cy="26" r="2" fill="#FF1493"/>
+    <circle cx="38" cy="26" r="2" fill="#FF1493"/>
+    <circle cx="26" cy="38" r="2" fill="#FF1493"/>
+    <circle cx="38" cy="38" r="2" fill="#FF1493"/>
+    
+    <!-- 中心小星星 -->
+    <path d="M32 28 L33 30 L35 30 L33.5 31.5 L34 34 L32 32.5 L30 34 L30.5 31.5 L29 30 L31 30 Z" fill="#FF69B4"/>
+    
+    <!-- 闪光效果 -->
+    <g opacity="0.6">
+      <line x1="20" y1="20" x2="22" y2="22" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="44" y1="20" x2="42" y2="22" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="20" y1="44" x2="22" y2="42" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+      <line x1="44" y1="44" x2="42" y2="42" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

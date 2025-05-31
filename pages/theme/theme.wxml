@@ -1,0 +1,90 @@
+<!--pages/theme/theme.wxml-->
+<view class="page theme-page" style="background: {{currentTheme.background}}">
+  <!-- 页面标题 -->
+  <view class="card">
+    <view class="page-title">
+      <text class="title-icon">🎨</text>
+      <text class="title-text">选择你喜欢的主题</text>
+    </view>
+    <view class="page-subtitle">让你的习惯小助手变得更可爱！</view>
+  </view>
+
+  <!-- 主题预览 -->
+  <view class="card preview-card">
+    <view class="preview-title">当前主题预览</view>
+    <view class="preview-demo">
+      <!-- 模拟积分显示 -->
+      <view class="demo-points" style="background: linear-gradient(135deg, {{currentTheme.primary}} 0%, {{currentTheme.primaryDark}} 100%)">
+        <view class="demo-points-number">88</view>
+        <view class="demo-points-label">✨ 我的小星星 ✨</view>
+      </view>
+      
+      <!-- 模拟按钮 -->
+      <view class="demo-buttons">
+        <button class="demo-btn-primary" style="background: linear-gradient(135deg, {{currentTheme.primary}} 0%, {{currentTheme.primaryDark}} 100%)">
+          ✅ 完成习惯
+        </button>
+        <button class="demo-btn-secondary" style="background: {{currentTheme.secondary}}; color: {{currentTheme.primary}}; border-color: {{currentTheme.primaryLight}}">
+          🎁 兑换奖励
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 主题选择 -->
+  <view class="card">
+    <view class="section-title">🌈 选择主题色彩</view>
+    <view class="themes-grid">
+      <view 
+        class="theme-item {{currentThemeKey === item.key ? 'selected' : ''}}" 
+        wx:for="{{themes}}" 
+        wx:key="key"
+        bindtap="selectTheme"
+        bindlongpress="previewTheme"
+        data-theme-key="{{item.key}}"
+      >
+        <!-- 主题图标 -->
+        <view class="theme-icon">
+          <image src="{{item.icon}}" class="theme-icon-img" mode="aspectFit"></image>
+        </view>
+
+        <!-- 主题色彩预览 -->
+        <view class="theme-preview">
+          <view class="theme-color-primary" style="background: {{item.primary}}"></view>
+          <view class="theme-color-secondary" style="background: {{item.primaryLight}}"></view>
+          <view class="theme-color-bg" style="background: {{item.secondary}}"></view>
+        </view>
+
+        <!-- 主题信息 -->
+        <view class="theme-info">
+          <view class="theme-name">{{item.name}}</view>
+          <view class="theme-emoji">{{item.emoji}}</view>
+        </view>
+        
+        <!-- 选中标识 -->
+        <view class="theme-selected" wx:if="{{currentThemeKey === item.key}}">
+          <text class="selected-icon">✓</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用提示 -->
+  <view class="card tips-card">
+    <view class="tips-title">💡 使用小贴士</view>
+    <view class="tips-list">
+      <view class="tip-item">
+        <text class="tip-icon">👆</text>
+        <text class="tip-text">点击主题卡片立即切换</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">👀</text>
+        <text class="tip-text">长按主题卡片可以预览效果</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">🎨</text>
+        <text class="tip-text">主题会应用到整个小程序</text>
+      </view>
+    </view>
+  </view>
+</view>
