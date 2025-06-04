@@ -15,7 +15,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
         run: |
-          echo "${PRIVATE_KEY}" > ./private_key
+          echo "${PRIVATE_KEY}" | sed 's/\\n/\n/g' > ./private_key
           chmod 600 ./private_key
       - name: Build 
         uses: docker://tencentcom/miniprogram-ci:latest
