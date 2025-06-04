@@ -16,5 +16,5 @@ jobs:
         env: 
           PLUGIN_APPID: ${vars.MP_ID}
           PLUGIN_PROJECTPATH: ./
-          PLUGIN_PRIVATEKEYPATH: ${secrets.MP_PRIVATE_KEY}
+          PLUGIN_PRIVATEKEY: ${secrets.MP_PRIVATE_KEY}
           PLUGIN_VERSION: 1.1.0
