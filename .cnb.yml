@@ -9,3 +9,8 @@ main:
             projectPath: ./
             privateKeyPath: https://cnb.cool/iptton/keys/-/blob/6539797756e05423a3f41063f13a1648d84904a0/habitKey.key
             version: ${CNB_BRANCH}
+  push:
+    - name: push to main
+      stages:
+        - name: test
+          script: echo "hello world"
