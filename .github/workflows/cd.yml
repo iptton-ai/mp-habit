@@ -14,7 +14,7 @@ jobs:
       - name: Build 
         uses: docker://tencentcom/miniprogram-ci:latest
         env: 
-          PLUGIN_APPID: ${vars.MP_ID}
+          PLUGIN_APPID: ${{ vars.MP_ID}}
           PLUGIN_PROJECTPATH: ./
-          PLUGIN_PRIVATEKEY: ${secrets.MP_PRIVATE_KEY}
+          PLUGIN_PRIVATEKEY: ${{ secrets.MP_PRIVATE_KEY }}
           PLUGIN_VERSION: 1.1.0
