@@ -15,11 +15,6 @@ jobs:
         run: |
           echo "${{ secrets.MP_PRIVATE_KEY }}" > ./private_key
           chmod 600 ./private_key
-      - name: 输出 private_key 文件内容
-        run: |
-          echo "====== private_key 文件内容开始 ======"
-          cat ./private_key
-          echo "====== private_key 文件内容结束 ======"
       - name: Build 
         uses: docker://tencentcom/miniprogram-ci:latest
         env: 
