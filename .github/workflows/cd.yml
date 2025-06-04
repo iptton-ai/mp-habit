@@ -1,0 +1,20 @@
+name: CD
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  scf-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@master
+      - name: Build 
+        uses: docker://tencentcom/miniprogram-ci:latest
+        env: 
+          PLUGIN_APPID: ${vars.MP_ID}
+          PLUGIN_PROJECTPATH: ./
+          PLUGIN_PRIVATEKEYPATH: ${secrets.MP_PRIVATE_KEY}
+          PLUGIN_VERSION: 1.1.0
