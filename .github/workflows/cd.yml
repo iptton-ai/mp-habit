@@ -9,6 +9,12 @@ jobs:
   scf-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Write private key to file
+        env:
+          PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
+        run: |
+          echo "${PRIVATE_KEY}" > ./private_key
+          chmod 600 ./private_key
       - name: Checkout 
         uses: actions/checkout@master
       - name: Build 
@@ -16,5 +22,5 @@ jobs:
         env: 
           PLUGIN_APPID: ${{ vars.MP_ID}}
           PLUGIN_PROJECTPATH: ./
-          PLUGIN_PRIVATEKEY: ${{ secrets.MP_PRIVATE_KEY }}
+          PLUGIN_PRIVATEKEYPATH: ./private_key
           PLUGIN_VERSION: 1.1.0
