@@ -12,10 +12,8 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@master
       - name: Write private key to file
-        env:
-          PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
         run: |
-          echo "${PRIVATE_KEY}" | sed 's/\\n/\n/g' > ./private_key
+          echo "${{ secrets.MP_PRIVATE_KEY }}" | sed 's/\\n/\n/g' > ./private_key
           chmod 600 ./private_key
       - name: Build 
         uses: docker://tencentcom/miniprogram-ci:latest
