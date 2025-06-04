@@ -9,14 +9,14 @@ jobs:
   scf-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout 
+        uses: actions/checkout@master
       - name: Write private key to file
         env:
           PRIVATE_KEY: ${{ secrets.MP_PRIVATE_KEY }}
         run: |
           echo "${PRIVATE_KEY}" > ./private_key
           chmod 600 ./private_key
-      - name: Checkout 
-        uses: actions/checkout@master
       - name: Build 
         uses: docker://tencentcom/miniprogram-ci:latest
         env: 
