@@ -2,10 +2,17 @@ main:
   push:
     - name: 微信小程序构建和推送
       stages:
+        - name: fetch-git-file
+          image: cnbcool/fetch-git-file
+          settings:
+            slug: iptton/keys
+            ref: main
+            files: |
+              habitKey.key
         - name: 构建和推送
           image: tencentcom/miniprogram-ci:latest
           settings:
             appid: wx8adebbc5073da357
             projectPath: ./
-            privateKeyPath: https://cnb.cool/iptton/keys/-/blob/6539797756e05423a3f41063f13a1648d84904a0/habitKey.key
+            privateKeyPath: ./habitKey.key
             version: 1.2.0
