@@ -12,7 +12,7 @@ Page({
       points: 5,
       type: 'positive'
     },
-    pointsOptions: [1, 2, 3, 5, 8, 10, 15, 20],
+    pointsOptions: [5, 10, 15, 20, 30, 50, 80, 100, 150, 200],
     typeOptions: [
       { value: 'positive', label: '好习惯（获得积分）' },
       { value: 'negative', label: '坏习惯（扣除积分）' }
@@ -146,5 +146,26 @@ Page({
   // 取消操作
   cancel() {
     wx.navigateBack()
+  },
+
+  // 分享页面
+  onShareAppMessage() {
+    const { mode, formData } = this.data
+    const habitName = formData.name || '好习惯'
+    return {
+      title: `🌟 我在用习惯小助手${mode === 'add' ? '添加' : '管理'}习惯：${habitName}`,
+      desc: '支持多用户管理，一起来养成好习惯吧！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '🌟 习惯小助手 - 让养成好习惯变得更有趣！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
   }
 })

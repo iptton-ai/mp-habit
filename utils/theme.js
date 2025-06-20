@@ -90,15 +90,35 @@ const themeUtils = {
 
   // 获取当前主题
   getCurrentTheme() {
-    const currentThemeKey = wx.getStorageSync('currentTheme') || 'pink'
-    return this.themes[currentThemeKey] || this.themes.pink
+    // 导入userUtils（避免循环依赖）
+    const { userUtils } = require('./util.js')
+    const currentUser = userUtils.getCurrentUser()
+
+    if (currentUser && currentUser.themeKey) {
+      return this.themes[currentUser.themeKey] || this.themes.pink
+    }
+
+    // 兼容旧版本的全局主题设置
+    const globalThemeKey = wx.getStorageSync('currentTheme') || 'pink'
+    return this.themes[globalThemeKey] || this.themes.pink
   },
 
   // 设置主题
   setTheme(themeKey) {
     if (this.themes[themeKey]) {
-      wx.setStorageSync('currentTheme', themeKey)
-      return this.themes[themeKey]
+      // 导入userUtils（避免循环依赖）
+      const { userUtils } = require('./util.js')
+      const currentUser = userUtils.getCurrentUser()
+
+      if (currentUser) {
+        // 更新当前用户的主题设置
+        userUtils.updateUser(currentUser.id, { themeKey })
+        return this.themes[themeKey]
+      } else {
+        // 兼容旧版本，设置全局主题
+        wx.setStorageSync('currentTheme', themeKey)
+        return this.themes[themeKey]
+      }
     }
     return this.themes.pink
   },
@@ -111,18 +131,27 @@ const themeUtils = {
     }))
   },
 
+  // 获取当前用户昵称
+  getCurrentUserName() {
+    const { userUtils } = require('./util.js')
+    const currentUser = userUtils.getCurrentUser()
+    return currentUser ? currentUser.name : '习惯小助手'
+  },
+
   // 应用主题到页面
   applyTheme(page) {
     const theme = this.getCurrentTheme()
-    
+    const userName = this.getCurrentUserName()
+
     // 设置页面数据
     if (page && page.setData) {
       page.setData({
-        currentTheme: theme
+        currentTheme: theme,
+        currentUserName: userName
       })
     }
 
-    // 动态设置导航栏颜色
+    // 动态设置导航栏颜色和标题
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: theme.primary,
@@ -131,6 +160,37 @@ const themeUtils = {
         timingFunc: 'easeIn'
       }
     })
+
+    // 动态设置导航栏标题（包含用户昵称）
+    const pages = getCurrentPages()
+    const currentPage = pages[pages.length - 1]
+    if (currentPage) {
+      const route = currentPage.route
+      let title = '🌟 习惯小助手 🌟'
+
+      // 根据页面设置不同的标题
+      if (route.includes('index')) {
+        title = `🏠 ${userName}的习惯小助手`
+      } else if (route.includes('habits')) {
+        title = `⭐ ${userName}的习惯`
+      } else if (route.includes('rewards')) {
+        title = `🎁 ${userName}的奖励`
+      } else if (route.includes('records')) {
+        title = `📖 ${userName}的记录`
+      } else if (route.includes('settings')) {
+        title = `⚙️ ${userName}的设置`
+      } else if (route.includes('users')) {
+        title = `👥 用户管理`
+      } else if (route.includes('theme')) {
+        title = `🎨 ${userName}的主题`
+      } else if (route.includes('data-sync')) {
+        title = `🔄 数据同步`
+      }
+
+      wx.setNavigationBarTitle({
+        title: title
+      })
+    }
 
     return theme
   },

@@ -1,0 +1,189 @@
+<!--pages/data-sync/data-sync.wxml-->
+<view class="page data-sync-page" style="background: {{currentTheme.background}}">
+  <!-- 页面标题 -->
+  <view class="card">
+    <view class="page-title">
+      <text class="title-icon">🔄</text>
+      <text class="title-text">数据同步</text>
+    </view>
+    <view class="page-subtitle">从其他用户复制习惯或奖励到当前用户</view>
+  </view>
+
+  <!-- 当前用户信息 -->
+  <view class="card">
+    <view class="section-title">📥 同步到</view>
+    <view class="current-user">
+      <view class="user-avatar">{{currentUser.avatar}}</view>
+      <view class="user-info">
+        <view class="user-name">{{currentUser.name}}</view>
+        <view class="user-desc">当前用户</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前选中的源用户 -->
+  <view class="card selected-source-card" wx:if="{{selectedUserId}}">
+    <view class="section-title">📤 当前选择的源用户</view>
+    <view class="selected-source-user">
+      <view class="user-avatar">{{selectedUser.avatar}}</view>
+      <view class="user-info">
+        <view class="user-name">{{selectedUser.name}}</view>
+        <view class="user-stats">
+          📝 {{sourceHabits.length}}个习惯 | 🎁 {{sourceRewards.length}}个奖励
+        </view>
+      </view>
+      <view class="change-source-btn" bindtap="clearSourceSelection">
+        <text>重新选择</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择源用户 -->
+  <view class="card" wx:if="{{!selectedUserId}}">
+    <view class="section-title">📤 从以下用户复制</view>
+    <view class="users-list" wx:if="{{otherUsers.length > 0}}">
+      <view
+        class="user-item {{selectedUserId === item.id ? 'selected' : ''}}"
+        wx:for="{{otherUsers}}"
+        wx:key="id"
+        bindtap="selectSourceUser"
+        data-user-id="{{item.id}}"
+        style="border-color: {{currentTheme.primary}}"
+      >
+        <view class="user-avatar">{{item.avatar}}</view>
+        <view class="user-info">
+          <view class="user-name">{{item.name}}</view>
+          <view class="user-stats">
+            📝 {{item.habitsCount || 0}}习惯 | 🎁 {{item.rewardsCount || 0}}奖励
+          </view>
+        </view>
+        <view class="select-indicator" wx:if="{{selectedUserId === item.id}}">✓</view>
+      </view>
+    </view>
+    <view class="empty-hint" wx:else>
+      <text>暂无其他用户</text>
+    </view>
+  </view>
+
+  <!-- 选择同步类型 -->
+  <view class="card" wx:if="{{selectedUserId}}">
+    <view class="section-title">🎯 选择同步内容</view>
+    <view class="sync-type-tabs">
+      <view
+        class="tab-item {{syncType === 'habits' ? 'active' : ''}}"
+        bindtap="switchSyncType"
+        data-type="habits"
+        style="background: {{syncType === 'habits' ? currentTheme.primary : currentTheme.secondary}}; color: {{syncType === 'habits' ? '#fff' : currentTheme.primary}}"
+      >
+        📝 习惯 ({{sourceHabits.length}})
+      </view>
+      <view
+        class="tab-item {{syncType === 'rewards' ? 'active' : ''}}"
+        bindtap="switchSyncType"
+        data-type="rewards"
+        style="background: {{syncType === 'rewards' ? currentTheme.primary : currentTheme.secondary}}; color: {{syncType === 'rewards' ? '#fff' : currentTheme.primary}}"
+      >
+        🎁 奖励 ({{sourceRewards.length}})
+      </view>
+    </view>
+
+
+  </view>
+
+  <!-- 习惯列表 -->
+  <view class="card" wx:if="{{selectedUserId && syncType === 'habits'}}">
+    <view class="section-header">
+      <view class="section-title">选择要复制的习惯</view>
+      <button 
+        class="select-all-btn" 
+        style="background: {{currentTheme.primaryLight}}; color: {{currentTheme.primary}}"
+        bindtap="toggleSelectAll"
+      >
+        {{selectedHabits.length === sourceHabits.length ? '取消全选' : '全选'}}
+      </button>
+    </view>
+    
+    <view class="data-list" wx:if="{{sourceHabits.length > 0}}">
+      <view
+        class="data-item {{item.selected ? 'selected' : ''}}"
+        wx:for="{{sourceHabits}}"
+        wx:key="id"
+        bindtap="toggleHabit"
+        data-habit-id="{{item.id}}"
+        style="border-color: {{currentTheme.cardBorder}}"
+      >
+        <view class="data-info">
+          <view class="data-name">{{item.name}}</view>
+          <view class="data-points" style="color: {{item.type === 'positive' ? '#28a745' : '#dc3545'}}">
+            {{item.type === 'positive' ? '+' : ''}}{{item.points}}分
+          </view>
+        </view>
+        <view
+          class="select-checkbox {{item.selected ? 'checked' : ''}}"
+          style="{{item.selected ? 'border-color: ' + currentTheme.primary + ' !important; background: ' + currentTheme.primary + ' !important; color: white !important;' : 'border-color: #ddd; background: #fff; color: #999;'}}"
+        >
+          <text wx:if="{{item.selected}}">✓</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-hint" wx:else>
+      <text>该用户暂无习惯</text>
+    </view>
+  </view>
+
+  <!-- 奖励列表 -->
+  <view class="card" wx:if="{{selectedUserId && syncType === 'rewards'}}">
+    <view class="section-header">
+      <view class="section-title">选择要复制的奖励</view>
+      <button 
+        class="select-all-btn" 
+        style="background: {{currentTheme.primaryLight}}; color: {{currentTheme.primary}}"
+        bindtap="toggleSelectAll"
+      >
+        {{selectedRewards.length === sourceRewards.length ? '取消全选' : '全选'}}
+      </button>
+    </view>
+    
+    <view class="data-list" wx:if="{{sourceRewards.length > 0}}">
+      <view
+        class="data-item {{item.selected ? 'selected' : ''}}"
+        wx:for="{{sourceRewards}}"
+        wx:key="id"
+        bindtap="toggleReward"
+        data-reward-id="{{item.id}}"
+        style="border-color: {{currentTheme.cardBorder}}"
+      >
+        <view class="data-info">
+          <view class="data-name">{{item.name}}</view>
+          <view class="data-points" style="color: {{currentTheme.primary}}">{{item.points}}分</view>
+        </view>
+        <view
+          class="select-checkbox {{item.selected ? 'checked' : ''}}"
+          style="{{item.selected ? 'border-color: ' + currentTheme.primary + ' !important; background: ' + currentTheme.primary + ' !important; color: white !important;' : 'border-color: #ddd; background: #fff; color: #999;'}}"
+        >
+          <text wx:if="{{item.selected}}">✓</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-hint" wx:else>
+      <text>该用户暂无奖励</text>
+    </view>
+  </view>
+
+  <!-- 同步按钮 -->
+  <view class="sync-footer" wx:if="{{selectedUserId}}">
+    <button 
+      class="sync-btn" 
+      style="background: {{currentTheme.primary}}"
+      bindtap="startSync"
+    >
+      🔄 开始同步 
+      <text wx:if="{{syncType === 'habits'}}">
+        ({{selectedHabits.length}}个习惯)
+      </text>
+      <text wx:else>
+        ({{selectedRewards.length}}个奖励)
+      </text>
+    </button>
+  </view>
+</view>

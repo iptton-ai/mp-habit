@@ -4,9 +4,9 @@
   <view class="card">
     <view class="page-title">
       <text class="title-icon">🎨</text>
-      <text class="title-text">选择你喜欢的主题</text>
+      <text class="title-text">{{currentUserName || '用户'}}的主题设置</text>
     </view>
-    <view class="page-subtitle">让你的习惯小助手变得更可爱！</view>
+    <view class="page-subtitle">选择你喜欢的主题，让习惯小助手变得更可爱！</view>
   </view>
 
   <!-- 主题预览 -->

@@ -1,12 +1,14 @@
 // pages/settings/settings.js
-const { pointUtils } = require('../../utils/util.js')
+const { pointUtils, userUtils } = require('../../utils/util.js')
 const { themeUtils } = require('../../utils/theme.js')
 
 Page({
   data: {
     totalPoints: 0,
-    version: '1.0.0',
-    currentTheme: null
+    version: '1.3.0',
+    currentTheme: null,
+    currentUser: null,
+    usersCount: 0
   },
 
   onLoad() {
@@ -22,9 +24,14 @@ Page({
   loadData() {
     const totalPoints = pointUtils.getTotalPoints()
     const currentTheme = themeUtils.getCurrentTheme()
+    const currentUser = userUtils.getCurrentUser()
+    const usersCount = userUtils.getUsers().length
+
     this.setData({
       totalPoints,
-      currentTheme
+      currentTheme,
+      currentUser,
+      usersCount
     })
   },
 
@@ -39,6 +46,50 @@ Page({
   goToTheme() {
     wx.navigateTo({
       url: '/pages/theme/theme'
+    })
+  },
+
+  // 跳转到用户管理
+  goToUsers() {
+    wx.navigateTo({
+      url: '/pages/users/users'
+    })
+  },
+
+  // 快速切换用户
+  quickSwitchUser() {
+    const users = userUtils.getUsers()
+    const currentUserId = userUtils.getCurrentUserId()
+
+    if (users.length <= 1) {
+      wx.showToast({
+        title: '只有一个用户',
+        icon: 'none'
+      })
+      return
+    }
+
+    const actionSheet = users
+      .filter(user => user.id !== currentUserId)
+      .map(user => `${user.avatar} ${user.name}`)
+
+    wx.showActionSheet({
+      itemList: actionSheet,
+      success: (res) => {
+        const selectedUser = users.filter(user => user.id !== currentUserId)[res.tapIndex]
+        if (selectedUser) {
+          userUtils.setCurrentUser(selectedUser.id)
+
+          // 重新加载数据和应用主题
+          this.loadData()
+          themeUtils.applyTheme(this)
+
+          wx.showToast({
+            title: `已切换到 ${selectedUser.name}`,
+            icon: 'success'
+          })
+        }
+      }
     })
   },
 
@@ -145,9 +196,63 @@ Page({
   showHelp() {
     wx.showModal({
       title: '使用帮助',
-      content: '1. 在"习惯"页面添加要养成的习惯\n2. 在"奖励"页面添加想要的奖励\n3. 完成习惯获得积分\n4. 用积分兑换奖励\n5. 在"记录"页面查看历史记录',
+      content: '1. 在"习惯"页面添加要养成的习惯\n2. 在"奖励"页面添加想要的奖励\n3. 完成习惯获得积分\n4. 用积分兑换奖励\n5. 在"记录"页面查看历史记录\n6. 在"用户管理"中可以添加多个用户',
       showCancel: false,
       confirmText: '知道了'
     })
+  },
+
+  // 分享应用
+  shareApp() {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+
+    // 触发分享
+    wx.shareAppMessage({
+      title: '🌟 习惯小助手 - 让养成好习惯变得更有趣！',
+      desc: '支持多用户管理，每个人都可以有自己的习惯追踪空间',
+      path: '/pages/index/index',
+      imageUrl: '', // 可以设置分享图片
+      success: (res) => {
+        wx.showToast({
+          title: '分享成功',
+          icon: 'success'
+        })
+
+        // 分享成功后跳转到首页
+        setTimeout(() => {
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
+        }, 1500)
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '分享失败',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  // 分享页面
+  onShareAppMessage() {
+    return {
+      title: '🌟 我在用习惯小助手管理生活！',
+      desc: '支持多用户管理，每个人都可以有自己的习惯追踪空间',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '🌟 习惯小助手 - 让养成好习惯变得更有趣！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
   }
 })

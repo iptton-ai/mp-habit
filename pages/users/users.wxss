@@ -1,0 +1,325 @@
+/* pages/users/users.wxss */
+
+.users-page {
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* 页面标题 */
+.page-title {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.title-icon {
+  font-size: 48rpx;
+  margin-right: 15rpx;
+}
+
+.title-text {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+/* 当前用户卡片 */
+.current-user-card {
+  margin-bottom: 30rpx;
+}
+
+.current-user {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16rpx;
+  border: 2rpx solid #28a745;
+}
+
+.current-user .user-avatar {
+  font-size: 60rpx;
+  margin-right: 20rpx;
+}
+
+.current-user .user-info {
+  flex: 1;
+}
+
+.current-user .user-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.current-user .user-points {
+  font-size: 28rpx;
+  color: #28a745;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.current-user .user-stats {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 区块标题 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.add-btn {
+  font-size: 24rpx;
+  color: white;
+  border-radius: 20rpx;
+  padding: 8rpx 16rpx;
+  border: none;
+}
+
+/* 用户列表 */
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.user-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  border: 2rpx solid transparent;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.user-item.current {
+  border-color: #28a745;
+  box-shadow: 0 4rpx 15rpx rgba(40, 167, 69, 0.2);
+}
+
+.user-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.user-avatar {
+  font-size: 50rpx;
+  margin-right: 20rpx;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+}
+
+.current-badge {
+  font-size: 20rpx;
+  color: white;
+  padding: 4rpx 8rpx;
+  border-radius: 8rpx;
+  margin-left: 10rpx;
+}
+
+.user-points {
+  font-size: 26rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.user-stats {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 用户操作按钮 */
+.user-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  border: none;
+  flex: 1;
+}
+
+.switch-btn {
+  color: white;
+}
+
+.edit-btn {
+  border: 1rpx solid currentColor;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+/* 数据同步区域 */
+.sync-description {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.sync-btn {
+  width: 100%;
+  color: white;
+  font-size: 28rpx;
+  padding: 15rpx;
+  border-radius: 16rpx;
+  border: none;
+}
+
+/* 模态框 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20rpx;
+  width: 600rpx;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 30rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.modal-body {
+  padding: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  padding: 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15rpx;
+}
+
+.avatar-option {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  border: 2rpx solid transparent;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.avatar-option.selected {
+  border-color: currentColor;
+  background: rgba(255, 105, 180, 0.1);
+}
+
+.modal-footer {
+  display: flex;
+  padding: 30rpx;
+  gap: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #666;
+}
+
+.confirm-btn {
+  color: white;
+}

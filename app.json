@@ -7,7 +7,10 @@
     "pages/settings/settings",
     "pages/habit-detail/habit-detail",
     "pages/reward-detail/reward-detail",
-    "pages/theme/theme"
+    "pages/theme/theme",
+    "pages/users/users",
+    "pages/user-detail/user-detail",
+    "pages/data-sync/data-sync"
   ],
   "window": {
     "backgroundTextStyle": "light",

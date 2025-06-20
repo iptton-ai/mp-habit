@@ -1,0 +1,142 @@
+<!--pages/users/users.wxml-->
+<view class="page users-page" style="background: {{currentTheme.background}}">
+  <!-- 页面标题 -->
+  <view class="card">
+    <view class="page-title">
+      <text class="title-icon">👥</text>
+      <text class="title-text">用户管理</text>
+    </view>
+    <view class="page-subtitle">管理所有用户，切换当前用户</view>
+  </view>
+
+  <!-- 当前用户信息 -->
+  <view class="card current-user-card">
+    <view class="section-title">🌟 当前用户</view>
+    <view class="current-user" wx:for="{{users}}" wx:key="id" wx:if="{{item.id === currentUserId}}">
+      <view class="user-avatar">{{item.avatar}}</view>
+      <view class="user-info">
+        <view class="user-name">{{item.name}}</view>
+        <view class="user-points">积分：{{item.totalPoints}}</view>
+        <view class="user-stats">
+          习惯：{{item.habitsCount}} | 奖励：{{item.rewardsCount}} | 记录：{{item.recordsCount}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户列表 -->
+  <view class="card">
+    <view class="section-header">
+      <view class="section-title">👨‍👩‍👧‍👦 所有用户</view>
+      <button class="add-btn" style="background: {{currentTheme.primary}}" bindtap="showAddUser">
+        ➕ 添加用户
+      </button>
+    </view>
+    
+    <view class="users-list">
+      <view 
+        class="user-item {{item.id === currentUserId ? 'current' : ''}}" 
+        wx:for="{{users}}" 
+        wx:key="id"
+        style="border-color: {{currentTheme.cardBorder}}"
+      >
+        <view class="user-main" bindtap="viewUserDetail" data-user-id="{{item.id}}">
+          <view class="user-avatar">{{item.avatar}}</view>
+          <view class="user-info">
+            <view class="user-name">
+              {{item.name}}
+              <text class="current-badge" wx:if="{{item.id === currentUserId}}" style="background: {{currentTheme.primary}}">当前</text>
+            </view>
+            <view class="user-points" style="color: {{currentTheme.primary}}">💰 {{item.totalPoints}} 积分</view>
+            <view class="user-stats">
+              📝 {{item.habitsCount}}习惯 | 🎁 {{item.rewardsCount}}奖励 | 📊 {{item.recordsCount}}记录
+            </view>
+          </view>
+        </view>
+        
+        <view class="user-actions">
+          <button 
+            class="action-btn switch-btn" 
+            wx:if="{{item.id !== currentUserId}}"
+            style="background: {{currentTheme.primaryLight}}; color: {{currentTheme.primary}}"
+            bindtap="switchUser" 
+            data-user-id="{{item.id}}"
+          >
+            切换
+          </button>
+          <button 
+            class="action-btn edit-btn" 
+            style="background: {{currentTheme.secondary}}; color: {{currentTheme.primary}}"
+            bindtap="editUser" 
+            data-user-id="{{item.id}}"
+          >
+            编辑
+          </button>
+          <button 
+            class="action-btn delete-btn" 
+            wx:if="{{users.length > 1}}"
+            bindtap="deleteUser" 
+            data-user-id="{{item.id}}"
+            data-user-name="{{item.name}}"
+          >
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据同步 -->
+  <view class="card">
+    <view class="section-title">🔄 数据同步</view>
+    <view class="sync-description">从其他用户复制习惯或奖励到当前用户</view>
+    <button class="sync-btn" style="background: {{currentTheme.primary}}" bindtap="goToDataSync">
+      开始同步数据
+    </button>
+  </view>
+
+  <!-- 添加用户对话框 -->
+  <view class="modal" wx:if="{{showAddDialog}}">
+    <view class="modal-mask" bindtap="hideAddUser"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">添加新用户</text>
+        <text class="modal-close" bindtap="hideAddUser">✕</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="form-item">
+          <view class="form-label">用户名</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入用户名" 
+            value="{{newUserName}}"
+            bindinput="onNameInput"
+            maxlength="10"
+          />
+        </view>
+        
+        <view class="form-item">
+          <view class="form-label">选择头像</view>
+          <view class="avatar-grid">
+            <view 
+              class="avatar-option {{newUserAvatar === item ? 'selected' : ''}}" 
+              wx:for="{{avatarOptions}}" 
+              wx:key="*this"
+              bindtap="selectAvatar"
+              data-avatar="{{item}}"
+              style="border-color: {{currentTheme.primary}}"
+            >
+              {{item}}
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="modal-btn cancel-btn" bindtap="hideAddUser">取消</button>
+        <button class="modal-btn confirm-btn" style="background: {{currentTheme.primary}}" bindtap="confirmAddUser">确认</button>
+      </view>
+    </view>
+  </view>
+</view>

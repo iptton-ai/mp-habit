@@ -1,0 +1,290 @@
+/* pages/user-detail/user-detail.wxss */
+
+.user-detail-page {
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* 用户信息卡片 */
+.user-info-card {
+  margin-bottom: 30rpx;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.user-avatar {
+  font-size: 80rpx;
+}
+
+.user-basic {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.user-create-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.user-points {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.edit-btn {
+  color: white;
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  border: none;
+}
+
+/* 编辑模式 */
+.edit-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.edit-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-form {
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  padding: 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15rpx;
+}
+
+.avatar-option {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  border: 2rpx solid transparent;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.avatar-option.selected {
+  border-color: currentColor;
+  background: rgba(255, 105, 180, 0.1);
+}
+
+/* 主题选择 */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15rpx;
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.theme-option.selected {
+  border-color: currentColor;
+  background: rgba(255, 105, 180, 0.1);
+  transform: scale(1.05);
+}
+
+.theme-color {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-bottom: 10rpx;
+}
+
+.theme-name {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #666;
+}
+
+.save-btn {
+  color: white;
+}
+
+/* 数据统计 */
+.stats-card {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16rpx;
+}
+
+.stat-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.stat-number {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5rpx;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 预览列表 */
+.habits-preview,
+.rewards-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.habit-item,
+.reward-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border: 1rpx solid transparent;
+}
+
+.habit-name,
+.reward-name {
+  font-size: 26rpx;
+  color: #333;
+  flex: 1;
+}
+
+.habit-points,
+.reward-points {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.more-hint {
+  text-align: center;
+  font-size: 24rpx;
+  color: #666;
+  padding: 15rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+/* 危险操作 */
+.danger-card {
+  border: 2rpx solid #dc3545;
+  background: #fff5f5;
+}
+
+.danger-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.danger-btn {
+  flex: 1;
+  padding: 15rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  border: none;
+  color: white;
+}
+
+.reset-btn {
+  background: #ffc107;
+}
+
+.clear-btn {
+  background: #dc3545;
+}
+
+.danger-warning {
+  text-align: center;
+  font-size: 24rpx;
+  color: #dc3545;
+  padding: 15rpx;
+  background: rgba(220, 53, 69, 0.1);
+  border-radius: 12rpx;
+}

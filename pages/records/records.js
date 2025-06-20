@@ -160,5 +160,24 @@ Page({
   // 格式化时间
   formatRecordTime(timestamp) {
     return formatTime(new Date(timestamp))
+  },
+
+  // 分享页面
+  onShareAppMessage() {
+    return {
+      title: '🌟 我在用习惯小助手记录成长！',
+      desc: '支持多用户管理，一起来养成好习惯吧！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '🌟 习惯小助手 - 让养成好习惯变得更有趣！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
   }
 })

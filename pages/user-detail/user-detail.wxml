@@ -1,0 +1,163 @@
+<!--pages/user-detail/user-detail.wxml-->
+<view class="page user-detail-page" style="background: {{currentTheme.background}}">
+  <!-- 用户信息卡片 -->
+  <view class="card user-info-card">
+    <view wx:if="{{mode === 'view'}}">
+      <view class="user-header">
+        <view class="user-avatar">{{user.avatar}}</view>
+        <view class="user-basic">
+          <view class="user-name">{{user.name}}</view>
+          <view class="user-create-time">创建时间：{{user.createTime}}</view>
+          <view class="user-points" style="color: {{currentTheme.primary}}">
+            💰 当前积分：{{userData.totalPoints}}
+          </view>
+        </view>
+        <button class="edit-btn" style="background: {{currentTheme.primary}}" bindtap="switchToEdit">
+          编辑
+        </button>
+      </view>
+    </view>
+    
+    <view wx:if="{{mode === 'edit'}}">
+      <view class="edit-header">
+        <text class="edit-title">编辑用户信息</text>
+      </view>
+      
+      <view class="edit-form">
+        <view class="form-item">
+          <view class="form-label">用户名</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入用户名" 
+            value="{{editName}}"
+            bindinput="onNameInput"
+            maxlength="10"
+          />
+        </view>
+        
+        <view class="form-item">
+          <view class="form-label">选择头像</view>
+          <view class="avatar-grid">
+            <view
+              class="avatar-option {{editAvatar === item ? 'selected' : ''}}"
+              wx:for="{{avatarOptions}}"
+              wx:key="*this"
+              bindtap="selectAvatar"
+              data-avatar="{{item}}"
+              style="border-color: {{currentTheme.primary}}"
+            >
+              {{item}}
+            </view>
+          </view>
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">选择主题</view>
+          <view class="theme-grid">
+            <view
+              class="theme-option {{editThemeKey === item.key ? 'selected' : ''}}"
+              wx:for="{{themeOptions}}"
+              wx:key="key"
+              bindtap="selectTheme"
+              data-theme-key="{{item.key}}"
+              style="border-color: {{editThemeKey === item.key ? item.primary : '#ddd'}}"
+            >
+              <view class="theme-color" style="background: {{item.primary}}"></view>
+              <view class="theme-name">{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="edit-actions">
+        <button class="action-btn cancel-btn" bindtap="cancelEdit">取消</button>
+        <button class="action-btn save-btn" style="background: {{currentTheme.primary}}" bindtap="saveUser">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="card stats-card">
+    <view class="section-title">📊 数据统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <view class="stat-icon">📝</view>
+        <view class="stat-number">{{userData.habits.length}}</view>
+        <view class="stat-label">习惯</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon">🎁</view>
+        <view class="stat-number">{{userData.rewards.length}}</view>
+        <view class="stat-label">奖励</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon">📊</view>
+        <view class="stat-number">{{userData.records.length}}</view>
+        <view class="stat-label">记录</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon">💰</view>
+        <view class="stat-number">{{userData.totalPoints}}</view>
+        <view class="stat-label">积分</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近习惯 -->
+  <view class="card" wx:if="{{userData.habits.length > 0}}">
+    <view class="section-title">⭐ 最近习惯</view>
+    <view class="habits-preview">
+      <view 
+        class="habit-item" 
+        wx:for="{{userData.habits}}" 
+        wx:key="id" 
+        wx:if="{{index < 3}}"
+        style="border-color: {{currentTheme.cardBorder}}"
+      >
+        <view class="habit-name">{{item.name}}</view>
+        <view class="habit-points" style="color: {{item.type === 'positive' ? '#28a745' : '#dc3545'}}">
+          {{item.type === 'positive' ? '+' : ''}}{{item.points}}分
+        </view>
+      </view>
+      <view class="more-hint" wx:if="{{userData.habits.length > 3}}">
+        还有 {{userData.habits.length - 3}} 个习惯...
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近奖励 -->
+  <view class="card" wx:if="{{userData.rewards.length > 0}}">
+    <view class="section-title">🎁 最近奖励</view>
+    <view class="rewards-preview">
+      <view 
+        class="reward-item" 
+        wx:for="{{userData.rewards}}" 
+        wx:key="id" 
+        wx:if="{{index < 3}}"
+        style="border-color: {{currentTheme.cardBorder}}"
+      >
+        <view class="reward-name">{{item.name}}</view>
+        <view class="reward-points" style="color: {{currentTheme.primary}}">{{item.points}}分</view>
+      </view>
+      <view class="more-hint" wx:if="{{userData.rewards.length > 3}}">
+        还有 {{userData.rewards.length - 3}} 个奖励...
+      </view>
+    </view>
+  </view>
+
+  <!-- 危险操作 -->
+  <view class="card danger-card">
+    <view class="section-title">⚠️ 危险操作</view>
+    <view class="danger-actions">
+      <button class="danger-btn reset-btn" bindtap="resetPoints">
+        重置积分
+      </button>
+      <button class="danger-btn clear-btn" bindtap="clearUserData">
+        清空所有数据
+      </button>
+    </view>
+    <view class="danger-warning">
+      ⚠️ 以上操作不可恢复，请谨慎操作
+    </view>
+  </view>
+</view>

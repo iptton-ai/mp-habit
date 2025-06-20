@@ -11,7 +11,7 @@ Page({
       name: '',
       points: 20
     },
-    pointsOptions: [10, 15, 20, 25, 30, 40, 50, 80, 100, 150, 200]
+    pointsOptions: [10, 15, 20, 25, 30, 40, 50, 80, 100, 150, 200, 500, 1000, 5000, 10000]
   },
 
   onLoad(options) {
@@ -84,7 +84,7 @@ Page({
   onCustomPointsInput(e) {
     const points = parseInt(e.detail.value) || 0
     this.setData({
-      'formData.points': Math.max(1, Math.min(1000, points))
+      'formData.points': Math.max(0, points)
     })
   },
 
@@ -146,5 +146,26 @@ Page({
   // 取消操作
   cancel() {
     wx.navigateBack()
+  },
+
+  // 分享页面
+  onShareAppMessage() {
+    const { mode, formData } = this.data
+    const rewardName = formData.name || '奖励'
+    return {
+      title: `🌟 我在用习惯小助手${mode === 'add' ? '添加' : '管理'}奖励：${rewardName}`,
+      desc: '支持多用户管理，一起来养成好习惯吧！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '🌟 习惯小助手 - 让养成好习惯变得更有趣！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
   }
 })

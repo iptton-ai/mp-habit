@@ -18,8 +18,17 @@ Page({
 
   loadThemes() {
     const themes = themeUtils.getAllThemes()
-    const currentThemeKey = wx.getStorageSync('currentTheme') || 'pink'
-    
+    const currentTheme = themeUtils.getCurrentTheme()
+
+    // 找到当前主题对应的key
+    let currentThemeKey = 'pink'
+    for (const [key, theme] of Object.entries(themeUtils.themes)) {
+      if (theme.name === currentTheme.name) {
+        currentThemeKey = key
+        break
+      }
+    }
+
     this.setData({
       themes,
       currentThemeKey
@@ -84,5 +93,24 @@ Page({
   // 恢复当前主题
   restoreTheme() {
     themeUtils.applyTheme(this)
+  },
+
+  // 分享页面
+  onShareAppMessage() {
+    return {
+      title: '🌟 我在用习惯小助手自定义主题！',
+      desc: '支持多用户管理，每个人都可以选择自己喜欢的主题色彩',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
+  },
+
+  // 分享到朋友圈
+  onShareTimeline() {
+    return {
+      title: '🌟 习惯小助手 - 个性化主题让习惯管理更有趣！',
+      path: '/pages/index/index',
+      imageUrl: ''
+    }
   }
 })

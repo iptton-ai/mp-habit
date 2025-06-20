@@ -33,14 +33,14 @@
       </view>
       
       <view class="form-item">
-        <view class="form-label">自定义积分 (1-1000)</view>
+        <view class="form-label">自定义积分</view>
         <input 
           class="form-input" 
           type="number" 
           placeholder="输入自定义积分数量" 
           value="{{formData.points}}"
           bindinput="onCustomPointsInput"
-          maxlength="4"
+          maxlength="-1"
         />
       </view>
       

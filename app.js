@@ -1,4 +1,6 @@
 // app.js
+const { userUtils } = require('./utils/util.js')
+
 App({
   onLaunch() {
     // 展示本地存储能力
@@ -11,28 +13,14 @@ App({
   },
 
   initData() {
-    // 初始化习惯数据
-    if (!wx.getStorageSync('habits')) {
-      wx.setStorageSync('habits', [])
-    }
-
-    // 初始化奖励数据
-    if (!wx.getStorageSync('rewards')) {
-      wx.setStorageSync('rewards', [])
-    }
-
-    // 初始化积分
-    if (!wx.getStorageSync('totalPoints')) {
-      wx.setStorageSync('totalPoints', 0)
-    }
-
-    // 初始化记录
-    if (!wx.getStorageSync('records')) {
-      wx.setStorageSync('records', [])
-    }
-
-    // 初始化模板数据
+    // 初始化模板数据（全局共享）
     this.initTemplates()
+
+    // 迁移旧数据并确保有默认用户
+    userUtils.migrateOldData()
+
+    // 确保有当前用户
+    userUtils.ensureDefaultUser()
   },
 
   initTemplates() {

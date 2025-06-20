@@ -7,6 +7,32 @@
     <view class="points-label">✨ 我的小星星 ✨</view>
   </view>
 
+  <!-- 用户管理 -->
+  <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
+    <view class="section-title mb-20" style="color: {{currentTheme.primary || '#FF69B4'}};">👥 用户管理</view>
+
+    <view class="setting-item current-user-item">
+      <view class="setting-info">
+        <view class="setting-name">当前用户</view>
+        <view class="setting-desc">{{currentUser.avatar}} {{currentUser.name}} ({{totalPoints}}积分)</view>
+      </view>
+      <view class="user-actions">
+        <button class="quick-switch-btn" style="background: {{currentTheme.primaryLight}}; color: {{currentTheme.primary}}" bindtap="quickSwitchUser" wx:if="{{usersCount > 1}}">
+          切换
+        </button>
+        <view class="setting-arrow" bindtap="goToUsers">></view>
+      </view>
+    </view>
+
+    <view class="setting-item" bindtap="goToUsers">
+      <view class="setting-info">
+        <view class="setting-name">用户管理</view>
+        <view class="setting-desc">管理所有用户 (共{{usersCount}}个用户)</view>
+      </view>
+      <view class="setting-arrow">></view>
+    </view>
+  </view>
+
   <!-- 个性化设置 -->
   <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
     <view class="section-title mb-20" style="color: {{currentTheme.primary || '#FF69B4'}};">🎨 个性化设置</view>
@@ -55,7 +81,7 @@
   <!-- 帮助与支持 -->
   <view class="card" style="background: {{currentTheme.cardBg || 'linear-gradient(145deg, #FFFFFF 0%, #FFF8FA 100%)'}}; border: 2rpx solid {{currentTheme.cardBorder || 'rgba(255, 182, 193, 0.3)'}};">
     <view class="section-title mb-20" style="color: {{currentTheme.primary || '#FF69B4'}};">💡 帮助与支持</view>
-    
+
     <view class="setting-item" bindtap="showHelp">
       <view class="setting-info">
         <view class="setting-name">使用帮助</view>
@@ -63,7 +89,15 @@
       </view>
       <view class="setting-arrow">></view>
     </view>
-    
+
+    <view class="setting-item" bindtap="shareApp">
+      <view class="setting-info">
+        <view class="setting-name">分享应用</view>
+        <view class="setting-desc">推荐给朋友一起养成好习惯</view>
+      </view>
+      <view class="setting-arrow">></view>
+    </view>
+
     <view class="setting-item" bindtap="showAbout">
       <view class="setting-info">
         <view class="setting-name">关于应用</view>
