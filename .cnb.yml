@@ -3,10 +3,13 @@ main:
     - name: 微信小程序构建和推送
       stages:
         - name: fetch-git-file
+          imports: https://cnb.cool/iptton/keys/-/blob/5a9e1683911361ce320da1847f079c57853e1568/habits.json
           image: cnbcool/fetch-git-file
           settings:
             slug: iptton/keys
             ref: main
+            target: .
+            token: $KEY_ACCESS_TOKEN
             files: |
               habitKey.key
         - name: 构建和推送
